@@ -1,12 +1,15 @@
-#include "Student.hpp"
+//#include "Student.hpp"
+#include <iostream>
+#include <string>
+#include <limits>
+
+using namespace std;
 
 /*******************************************************************************
  * Function prototypes
 *******************************************************************************/
 
-void getInput(Student[], const int);
-int modify(int);
-void display(const Student[], const int);
+
 
 /*******************************************************************************
  * Description:
@@ -19,10 +22,55 @@ void display(const Student[], const int);
  * An integer to signal to the OS the exit code.
 *******************************************************************************/
 
+class Student
+{
+private: 
+    string* name; 
+    int* age;
+    
+public: 
+    Student()
+    {
+        name = new string("");
+        age = new int(0);
+    }
+    ~Student()
+    {
+        delete name;
+        delete age;
+        cout << "Student Object destroyed" << endl;
+    }
+    void setName (string s)
+    {
+        *name = s;
+    }
+    void setAge (int i)
+    {
+        *age = i;
+    }
+    string getName() const
+    {
+        return *name;
+    }
+    int getAge() const
+    {
+        return *age;
+    }
+};
+
+void getInput(Student[], const int);
+int modify(int);
+void display(const Student[], const int);
+
 int main() {
     // variables
     const int SIZE = 5;
     Student objArray[SIZE];
+    for (int i; i < SIZE; i++)
+    {
+        cout << "Student object created!" << endl;
+    }
+    
 
     // get input from the user
     getInput(objArray, SIZE);
@@ -31,6 +79,7 @@ int main() {
     // uses a range-based for loop with a reference variable
     for (Student& s : objArray) {
         s.setAge(modify(s.getAge()));
+        
     }
 
     // display the modified information back to the user
@@ -134,3 +183,4 @@ void display(const Student objArray[], const int SIZE) {
         i++;
     }
 }
+
